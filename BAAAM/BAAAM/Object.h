@@ -17,6 +17,14 @@ public:
 	// 여기서 const는 무슨 뜻일까요? 
 	// getshape 함수로 반환하더라도 변형은 불가능하다는 뜻인가. 
 	// const가 들어가있는 순서가..
+    /// > 함수 바로 뒤에 const가 붙는 경우는, 해당 함수가 멤버변수를 수정하지 않는다는 의미입니다.
+    /// > 함수에서 반환한 값에 영향을 주는 것은 아니고, 함수 내부에서의 불변성을 뜻합니다.
+    /// > const 객체에서는 const 함수만을 호출할 수 있습니다.
+    /// > (그 객체의 상태를 변경하지 않는다는 것이 보장되기 때문에)
+    /// > 예)
+    /// > const Obejct a;
+    /// > a.GetShape();     // ok
+    /// > a.SetShape(' ');  // error
 	char GetShape() const { return m_Shape; }
 	short GetX() const { return m_X; }
 	short GetY() const { return m_Y; }
