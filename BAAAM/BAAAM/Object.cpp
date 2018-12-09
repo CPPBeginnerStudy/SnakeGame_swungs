@@ -8,7 +8,7 @@ Object::Object()
 	,m_Y(0)
 	,m_Speed(0)
 	,m_SpeedMin(1)
-	,m_SpeedMax(5)
+	,m_SpeedMax(3)
 	,m_IsRight(true)
 	,m_IsBottom(true)
 {
