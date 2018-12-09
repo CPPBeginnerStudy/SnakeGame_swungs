@@ -82,8 +82,6 @@ void Object::Update()
 	// 모서리에서 튕겼으면 속도 랜덤하게 변화시켜준다
 	if (IsBoundary)
 	{
-		// 랜덤 시드 초기화. 어디다 해야 되냐 이거
-		srand((unsigned int)time(nullptr));
 		m_Speed = rand() % (m_SpeedMax- m_SpeedMin +1) + m_SpeedMin;
 	}
 	
