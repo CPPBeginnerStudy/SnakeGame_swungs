@@ -60,6 +60,7 @@ void GameManager::Init()
 		pObject->SetShape('O');
 		pObject->SetX(rand() % boundaryBox.right);
 		pObject->SetY(rand() % boundaryBox.bottom);
+		pObject->SetSpeed(1);
 		m_ObjectList.push_back(pObject);
 	}
 

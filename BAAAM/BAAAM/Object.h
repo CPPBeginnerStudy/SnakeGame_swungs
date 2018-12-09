@@ -28,17 +28,24 @@ public:
 	char GetShape() const { return m_Shape; }
 	short GetX() const { return m_X; }
 	short GetY() const { return m_Y; }
+	short GetSpeed() const { return m_Speed; }
+
 
 	void SetShape(char _shape) { m_Shape = _shape; }
 	void SetX(short _x) { m_X = _x; }
 	void SetY(short _y) { m_Y = _y; }
-
+	void SetSpeed(short _speed) { m_Speed = _speed; }
 
 private:
 	// 모양과 좌표
 	char m_Shape;
 	short m_X;
 	short m_Y;
+
+	// 속도
+	short m_Speed;
+	short m_SpeedMin;
+	short m_SpeedMax;
 
 	// 이동방향 구분
 	bool m_IsRight;
