@@ -8,7 +8,7 @@ Object::Object()
 	,m_Y(0)
 	,m_Speed(0)
 	,m_SpeedMin(1) 	// 정수형 좌표니까 최소값은 1인데 이것보다 더 속도를 줄이고 싶으면 어떻게 하지?
-	,m_SpeedMax(5)
+	,m_SpeedMax(3)
 	,m_IsRight(true)
 	,m_IsBottom(true)
 {
@@ -76,10 +76,6 @@ void Object::Update()
 
 	}
 	
-
-
-}
-
 void Object::Render()
 {
 	Console::GetInstance().Print(m_Shape, m_X, m_Y);
