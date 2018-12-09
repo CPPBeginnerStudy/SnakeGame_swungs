@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Base">
-      <UniqueIdentifier>{db366e16-a889-4e90-ba2c-89ffb0596627}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Class">
-      <UniqueIdentifier>{b4aa6f16-888d-4794-bd2a-30d759f7d3d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Class\Object">
-      <UniqueIdentifier>{a7786cc1-23ff-4e6a-8637-610e55b92b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Class\Singleton">
-      <UniqueIdentifier>{0e46d23c-50c8-43fe-830c-3e47fe26a0ab}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Class\Object</Filter>
+    <ClCompile Include="pch.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Class\Singleton</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Class\Singleton</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
-      <Filter>Class\Singleton</Filter>
+    <ClCompile Include="Object.cpp">
+      <Filter>Class\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Class\Object</Filter>
+    <ClInclude Include="Console.h">
+      <Filter>Class\Singleton</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Class\Singleton</Filter>
     </ClInclude>
-    <ClInclude Include="Console.h">
-      <Filter>Class\Singleton</Filter>
+    <ClInclude Include="Object.h">
+      <Filter>Class\Object</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{0b3b7beb-1ea8-40af-a2bd-a41a8781dd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class">
+      <UniqueIdentifier>{743cb1fc-cdd9-40a2-8564-37fdb73204c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Object">
+      <UniqueIdentifier>{6fe1e075-e70f-4115-886a-d07e64e3c159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Singleton">
+      <UniqueIdentifier>{934df86d-4a89-4233-9425-50be1284b11d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
