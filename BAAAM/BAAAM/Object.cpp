@@ -7,7 +7,7 @@ Object::Object()
 	,m_X(0)
 	,m_Y(0)
 	,m_Speed(0)
-	,m_SpeedMin(1)
+	,m_SpeedMin(1) 	// 정수형 좌표니까 최소값은 1인데 이것보다 더 속도를 줄이고 싶으면 어떻게 하지?
 	,m_SpeedMax(5)
 	,m_IsRight(true)
 	,m_IsBottom(true)
@@ -32,11 +32,6 @@ void Object::Update()
 	// 화면의 바운더리를 벗어나려 하면 반대 방향으로 전환하여 계속 움직이도록 하는 코드 
 	RECT boundaryBox = Console::GetInstance().GetBoundaryBox();
 
-	// 속도 변화 줄 것인지 여부
-	bool IsBoundary = false;
-
-	// 정수형 좌표니까 최소값은 1인데 이것보다 더 속도를 줄이고 싶으면 어떻게 하지?
-
 	if (m_IsRight)
 	{
 		m_X = m_X + m_Speed;
@@ -44,7 +39,7 @@ void Object::Update()
 		{
 			m_X = boundaryBox.right;
 			m_IsRight = false;
-			IsBoundary = true;
+			m_Speed = rand() % (m_SpeedMax - m_SpeedMin + 1) + m_SpeedMin;
 		}
 	}
 	else
@@ -54,7 +49,7 @@ void Object::Update()
 		{
 			m_X = boundaryBox.left;
 			m_IsRight = true;	
-			IsBoundary = true;
+			m_Speed = rand() % (m_SpeedMax - m_SpeedMin + 1) + m_SpeedMin;
 		}
 	}
 
@@ -65,7 +60,7 @@ void Object::Update()
 		{
 			m_Y = boundaryBox.bottom;
 			m_IsBottom = false;
-			IsBoundary = true;
+			m_Speed = rand() % (m_SpeedMax - m_SpeedMin + 1) + m_SpeedMin;
 		}
 	}
 	else
@@ -75,14 +70,10 @@ void Object::Update()
 		{
 			m_Y = boundaryBox.top;
 			m_IsBottom = true;
-			IsBoundary = true;
+			m_Speed = rand() % (m_SpeedMax - m_SpeedMin + 1) + m_SpeedMin;
 		}
 	}
 
-	// 모서리에서 튕겼으면 속도 랜덤하게 변화시켜준다
-	if (IsBoundary)
-	{
-		m_Speed = rand() % (m_SpeedMax- m_SpeedMin +1) + m_SpeedMin;
 	}
 	
 
