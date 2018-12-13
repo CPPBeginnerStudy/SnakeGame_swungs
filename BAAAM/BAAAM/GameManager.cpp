@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "Console.h"
 #include "Object.h"
-
+#include "RandomSpeedObj.h"
 
 GameManager::GameManager()
 	:m_IsOn(false)
@@ -53,15 +53,27 @@ void GameManager::Init()
 	//Console::GetInstance().Init();
 
 	RECT boundaryBox = console.GetBoundaryBox();
-	for (int i = 0; i < 5; ++i)
+
+	// 2개는 등속 기본 오브젝트
+	for (int i = 0; i < 2; ++i)
 	{
 		Object* pObject = new Object();
-		pObject->SetShape(L'♥');
+		pObject->SetShape(L'▦');
 		pObject->SetX(rand() % boundaryBox.right);
 		pObject->SetY(rand() % boundaryBox.bottom);
 		m_ObjectList.push_back(pObject);
 		//이 경우 초기화한대로 무조건 오른쪽 아래로 움직이게 되는데
 		//인스턴스 생성 시 방향도 무작위로 지정하고 싶다
+	}
+
+	// 3개는 랜덤 속도 오브젝트(기본 오브젝트 상속)
+	for (int i = 0; i < 3; ++i)
+	{
+		Object* pObject = new RandomSpeedObj();
+		pObject->SetShape(L'♬');
+		pObject->SetX(rand() % boundaryBox.right);
+		pObject->SetY(rand() % boundaryBox.bottom);
+		m_ObjectList.push_back(pObject);
 	}
 
 	// 게임 시작시

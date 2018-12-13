@@ -1,42 +1,31 @@
 #include "pch.h"
-#include "Object.h"
+#include "RandomSpeedObj.h"
 #include "Console.h"
 
-Object::Object()
-	:m_Shape(' ')
-	,m_X(0)
-	,m_Y(0)
-	,m_SpeedX(1)    
-	,m_SpeedY(1)  
-	,m_IsRight(true)   
-	,m_IsBottom(true)  
 
-	// 정수형 좌표니까 최소값은 1인데 이것보다 더 속도를 줄이고 싶으면 어떻게 하지?
-	/// > 좋은 질문입니다! 속도를 정수값 이하까지 컨트롤하고 싶다면,
-	/// > 내부적으로 실수형(float)좌표계를 가지게 하고, 이를 렌더링할때에
-	/// > 정수형으로 변환해서 맞추어 그리면 가능합니다.
+RandomSpeedObj::RandomSpeedObj()
 {
 }
 
 
-Object::~Object()
+RandomSpeedObj::~RandomSpeedObj()
 {
 }
 
-void Object::Update()
+void RandomSpeedObj::Update()
 {
 	// 화면의 바운더리를 벗어나려 하면 반대 방향으로 전환하여 계속 움직이도록 하는 코드 
 	RECT boundaryBox = Console::GetInstance().GetBoundaryBox();
 
 	// 속력 랜덤 최소 최대값(임시)
-	int speedMax = 1;
+	int speedMax = 3;
 	int speedMin = 1;
 
 	if (m_IsRight)
 	{
 		m_X += m_SpeedX;
-        /// > m_X = m_X + m_Speed; 와 같이 어떤 변수가 자신의 값을 토대로 수정되는 경우
-        /// > m_X += m_Speed; 처럼 자신의 값에 다른 어떤 값을 더하는 방식으로도 쓸 수 있습니다.
+		/// > m_X = m_X + m_Speed; 와 같이 어떤 변수가 자신의 값을 토대로 수정되는 경우
+		/// > m_X += m_Speed; 처럼 자신의 값에 다른 어떤 값을 더하는 방식으로도 쓸 수 있습니다.
 		if (m_X > boundaryBox.right)
 		{
 			m_X = boundaryBox.right;
@@ -50,7 +39,7 @@ void Object::Update()
 		if (m_X < boundaryBox.left)
 		{
 			m_X = boundaryBox.left;
-			m_IsRight = true;	
+			m_IsRight = true;
 			m_SpeedX = rand() % (speedMax - speedMin + 1) + speedMin;
 		}
 	}
@@ -76,9 +65,12 @@ void Object::Update()
 		}
 	}
 
-	}
-	
-void Object::Render()
+}
+
+void RandomSpeedObj::Render()
 {
-	Console::GetInstance().Print(m_Shape, m_X, m_Y);
+	// 오버라이딩한 함수는 기본적으로 부모함수를 호출하지 않는다. 
+	// 따라서 부모함수도 호출할 필요가 있을 경우 아래와 같이 부모클래스::함수명 으로 호출해준다. 
+	// 부모 클래스의 구현과 다르게 처리할 게 없다면, 그냥 부모꺼를 여기서 다시 호출해주면 된다. 
+	Object::Render();
 }

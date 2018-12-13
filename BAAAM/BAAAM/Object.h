@@ -35,6 +35,10 @@ public:
 	void SetY(short _y) { m_Y = _y; }
 
 private:
+protected: 
+	// 이 범위는 자식 클래스에서도 접근이 가능한 범위이다.
+	// 접근이 가능하다는 말이 정확히 무슨 의미인지 잘 모르겠습니다.
+	// RandomSpeedObj.m_X 이런 식으로 자식 클래스에서 아래의 멤버 변수들을 사용할 수 없다는 뜻인가요? 
 	// 모양과 좌표
 	wchar_t m_Shape;
 	short m_X;
