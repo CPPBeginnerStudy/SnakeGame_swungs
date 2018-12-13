@@ -56,10 +56,12 @@ void GameManager::Init()
 	for (int i = 0; i < 5; ++i)
 	{
 		Object* pObject = new Object();
-		pObject->SetShape('O');
+		pObject->SetShape(L'♥');
 		pObject->SetX(rand() % boundaryBox.right);
 		pObject->SetY(rand() % boundaryBox.bottom);
 		m_ObjectList.push_back(pObject);
+		//이 경우 초기화한대로 무조건 오른쪽 아래로 움직이게 되는데
+		//인스턴스 생성 시 방향도 무작위로 지정하고 싶다
 	}
 
 	// 게임 시작시

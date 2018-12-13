@@ -69,8 +69,8 @@ public:
 	void Clear();
 	void SwapBuffer();
 
-	void Print(char _shape, short _x, short _y);
-	void PrintText(const std::string& _text, short _x, short _y);
+	void Print(wchar_t _shape, short _x, short _y);
+	void PrintText(const std::wstring& _text, short _x, short _y);
 
 	RECT     GetBoundaryBox() const;
 
