@@ -9,8 +9,9 @@ public:
 	virtual ~Object();
 
 	// 오브젝트 클래스 구성 함수
-	virtual void Init();
-	virtual void Release();
+	// 사용할 일이 없을 거 같으니 제거
+	//virtual void Init();
+	//virtual void Release();
 	virtual void Update();
 	virtual void Render();
 
@@ -28,13 +29,10 @@ public:
 	char GetShape() const { return m_Shape; }
 	short GetX() const { return m_X; }
 	short GetY() const { return m_Y; }
-	short GetSpeed() const { return m_Speed; }
-
 
 	void SetShape(char _shape) { m_Shape = _shape; }
 	void SetX(short _x) { m_X = _x; }
 	void SetY(short _y) { m_Y = _y; }
-	void SetSpeed(short _speed) { m_Speed = _speed; }
 
 private:
 	// 모양과 좌표
@@ -42,10 +40,9 @@ private:
 	short m_X;
 	short m_Y;
 
-	// 속도
-	short m_Speed;
-	short m_SpeedMin;
-	short m_SpeedMax;
+	// 속력
+	short m_SpeedX;
+	short m_SpeedY;
 
 	// 이동방향 구분
 	bool m_IsRight;

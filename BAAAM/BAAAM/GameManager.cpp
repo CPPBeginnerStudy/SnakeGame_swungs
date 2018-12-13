@@ -56,11 +56,9 @@ void GameManager::Init()
 	for (int i = 0; i < 5; ++i)
 	{
 		Object* pObject = new Object();
-		pObject->Init();
 		pObject->SetShape('O');
 		pObject->SetX(rand() % boundaryBox.right);
 		pObject->SetY(rand() % boundaryBox.bottom);
-		pObject->SetSpeed(1);
 		m_ObjectList.push_back(pObject);
 	}
 
@@ -74,7 +72,6 @@ void GameManager::Release()
 
 	for (auto& pObject : m_ObjectList)
 	{
-		pObject->Release();
 		delete pObject;
 	}
 
