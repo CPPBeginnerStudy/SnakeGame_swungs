@@ -1,6 +1,17 @@
 #pragma once
 class Object
 {
+
+public:
+	//클래스 안에 클래스, 이넘 정의 가능
+	enum class Direction
+	{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT,
+	};
+
 public:
 	// 소멸자를 가상 소멸자로 선언한다
 	// 이 클래스를 상속받은 클래스들의 멤버 변수나 함수가 
@@ -37,6 +48,10 @@ public:
 	void SetShape(wchar_t _shape) { m_Shape = _shape; }
 	void SetX(float _x) { m_X = _x; }
 	void SetY(float _y) { m_Y = _y; }
+
+	// 방향과 거리를 인자로 받아서 이동을 수행하고,
+    // 실제로 이동을 했는지 여부를 bool값으로 반환하는 함수
+	bool Move(Direction _dir, float _distance);
 
 private:
 protected: 
