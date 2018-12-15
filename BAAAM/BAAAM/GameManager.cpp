@@ -83,7 +83,7 @@ void GameManager::Init()
 	m_pSnakeBody = new SnakeBody();
 	m_pSnakeBody->SetShape(L'⒚');
 	m_pSnakeBody->SetX(boundaryBox.right / 2);  // 吝居俊 积己  
-	m_pSnakeBody->SetY(boundaryBox.bottom / 2); // 吝居俊 积己  
+	m_pSnakeBody->SetY(boundaryBox.bottom / 2); // 吝居俊 积己
 	m_ObjectList.push_back(m_pSnakeBody);
 
 
