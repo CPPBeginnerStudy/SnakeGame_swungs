@@ -15,9 +15,5 @@ public:
 
 private:
 
-	// ¼Ó·Â
-	//float m_SpeedX;
-	//float m_SpeedY;
-
 };
 

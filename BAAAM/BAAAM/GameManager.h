@@ -1,5 +1,6 @@
 #pragma once
 class Object; // 전방 선언
+class SnakeBody;
 class GameManager
 {
 
@@ -30,6 +31,8 @@ private:
 	void Update(); // 업데이트
 	void Render(); // 렌더링
 
+	void KeyInputHandling();
+
 
 // 프라이빗 변수
 private:
@@ -37,6 +40,7 @@ private:
 	// 멤버 변수는 관습적으로 m_ 을 붙여서 표현한다
 	bool m_IsOn;
 	std::list<Object*> m_ObjectList;
+	SnakeBody* m_pSnakeBody;
 
 };
 
