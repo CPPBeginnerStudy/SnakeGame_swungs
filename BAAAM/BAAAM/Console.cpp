@@ -125,7 +125,7 @@ RECT Console::GetBoundaryBox() const
 	boundaryBox.top = 0;
 	boundaryBox.left = 0;
 	boundaryBox.right = m_ScreenWidth - 2;
-	boundaryBox.bottom = m_ScreenHeight - 1;
+	boundaryBox.bottom = m_ScreenHeight - 2; // 맨 아래줄은 오른쪽 끝이 표시 불가라 쓰지 않는다
 
 	// 바운더리 박스 반환
 	return boundaryBox;

@@ -17,51 +17,51 @@ void RandomSpeedObj::Update()
 	// 화면의 바운더리를 벗어나려 하면 반대 방향으로 전환하여 계속 움직이도록 하는 코드 
 	RECT boundaryBox = Console::GetInstance().GetBoundaryBox();
 
-	// 속력 랜덤 최소 최대값(임시)
-	int speedMax = 3;
+	// 속력 랜덤 최소 최대값(임시) /2될 값
+	int speedMax = 6;
 	int speedMin = 1;
 
 	if (m_IsRight)
 	{
-		m_X += m_SpeedX;
+		m_X += 2 * m_SpeedX;
 		/// > m_X = m_X + m_Speed; 와 같이 어떤 변수가 자신의 값을 토대로 수정되는 경우
 		/// > m_X += m_Speed; 처럼 자신의 값에 다른 어떤 값을 더하는 방식으로도 쓸 수 있습니다.
 		if (m_X > boundaryBox.right)
 		{
 			m_X = boundaryBox.right;
 			m_IsRight = false;
-			m_SpeedX = rand() % (speedMax - speedMin + 1) + speedMin;
+			m_SpeedX = (rand() % (speedMax - speedMin + 1) + speedMin) * 0.5f;
 		}
 	}
 	else
 	{
-		m_X -= m_SpeedX;
+		m_X -= 2 * m_SpeedX;
 		if (m_X < boundaryBox.left)
 		{
 			m_X = boundaryBox.left;
 			m_IsRight = true;
-			m_SpeedX = rand() % (speedMax - speedMin + 1) + speedMin;
+			m_SpeedX = (rand() % (speedMax - speedMin + 1) + speedMin) * 0.5f;
 		}
 	}
 
 	if (m_IsBottom)
 	{
-		m_Y += m_SpeedY;
+		m_Y += 1 * m_SpeedY;
 		if (m_Y > boundaryBox.bottom)
 		{
 			m_Y = boundaryBox.bottom;
 			m_IsBottom = false;
-			m_SpeedY = rand() % (speedMax - speedMin + 1) + speedMin;
+			m_SpeedY = (rand() % (speedMax - speedMin + 1) + speedMin) * 0.5f;
 		}
 	}
 	else
 	{
-		m_Y -= m_SpeedY;
+		m_Y -= 1 * m_SpeedY;
 		if (m_Y < boundaryBox.top)
 		{
 			m_Y = boundaryBox.top;
 			m_IsBottom = true;
-			m_SpeedY = rand() % (speedMax - speedMin + 1) + speedMin;
+			m_SpeedY = (rand() % (speedMax - speedMin + 1) + speedMin) * 0.5f;
 		}
 	}
 

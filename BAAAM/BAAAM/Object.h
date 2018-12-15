@@ -5,6 +5,10 @@ public:
 	// 소멸자를 가상 소멸자로 선언한다
 	// 이 클래스를 상속받은 클래스들의 멤버 변수나 함수가 
 	// 각 상속받은 클래스에서 정의된대로 쓰이려면 이렇게 가상 소멸자로 선언해야 한다고 한다.
+
+	// 위 이미지에서 Object1은 new BaseClass()로 생성됐고, Object2는 new DerivedClass()로 생성됐다고 보면 된다. 
+	// 버추얼 테이블 개념은 얼추 이해가 된 것 같은데 
+	// 참고 이미지는 이해를 못했어요. 수업에서 상세 설명 부탁드리겠습니다 ;ㅁ;
 	Object();
 	virtual ~Object();
 
@@ -27,12 +31,12 @@ public:
     /// > a.GetShape();     // ok
     /// > a.SetShape(' ');  // error
 	wchar_t GetShape() const { return m_Shape; }
-	short GetX() const { return m_X; }
-	short GetY() const { return m_Y; }
+	float GetX() const { return m_X; }
+	float GetY() const { return m_Y; }
 
 	void SetShape(wchar_t _shape) { m_Shape = _shape; }
-	void SetX(short _x) { m_X = _x; }
-	void SetY(short _y) { m_Y = _y; }
+	void SetX(float _x) { m_X = _x; }
+	void SetY(float _y) { m_Y = _y; }
 
 private:
 protected: 
@@ -41,12 +45,12 @@ protected:
 	// RandomSpeedObj.m_X 이런 식으로 자식 클래스에서 아래의 멤버 변수들을 사용할 수 없다는 뜻인가요? 
 	// 모양과 좌표
 	wchar_t m_Shape;
-	short m_X;
-	short m_Y;
+	float m_X;
+	float m_Y;
 
 	// 속력
-	short m_SpeedX;
-	short m_SpeedY;
+	float m_SpeedX;
+	float m_SpeedY;
 
 	// 이동방향 구분
 	bool m_IsRight;

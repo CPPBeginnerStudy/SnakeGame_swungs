@@ -4,10 +4,10 @@
 
 Object::Object()
 	:m_Shape(' ')
-	,m_X(0)
-	,m_Y(0)
-	,m_SpeedX(1)    
-	,m_SpeedY(1)  
+	,m_X(0.f)
+	,m_Y(0.f)
+	,m_SpeedX(1.f)    
+	,m_SpeedY(1.f)  
 	,m_IsRight(true)   
 	,m_IsBottom(true)  
 
@@ -34,7 +34,7 @@ void Object::Update()
 
 	if (m_IsRight)
 	{
-		m_X += m_SpeedX;
+		m_X += 2 * m_SpeedX;
         /// > m_X = m_X + m_Speed; 와 같이 어떤 변수가 자신의 값을 토대로 수정되는 경우
         /// > m_X += m_Speed; 처럼 자신의 값에 다른 어떤 값을 더하는 방식으로도 쓸 수 있습니다.
 		if (m_X > boundaryBox.right)
@@ -46,7 +46,7 @@ void Object::Update()
 	}
 	else
 	{
-		m_X -= m_SpeedX;
+		m_X -= 2 * m_SpeedX;
 		if (m_X < boundaryBox.left)
 		{
 			m_X = boundaryBox.left;
@@ -57,7 +57,7 @@ void Object::Update()
 
 	if (m_IsBottom)
 	{
-		m_Y += m_SpeedY;
+		m_Y += 1 * m_SpeedY;
 		if (m_Y > boundaryBox.bottom)
 		{
 			m_Y = boundaryBox.bottom;
@@ -67,7 +67,7 @@ void Object::Update()
 	}
 	else
 	{
-		m_Y -= m_SpeedY;
+		m_Y -= 1 * m_SpeedY;
 		if (m_Y < boundaryBox.top)
 		{
 			m_Y = boundaryBox.top;
@@ -80,5 +80,5 @@ void Object::Update()
 	
 void Object::Render()
 {
-	Console::GetInstance().Print(m_Shape, m_X, m_Y);
+	Console::GetInstance().Print(m_Shape, (short)m_X, (short)m_Y);
 }
