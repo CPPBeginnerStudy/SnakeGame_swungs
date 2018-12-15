@@ -15,7 +15,10 @@ SnakeBody::~SnakeBody()
 
 void SnakeBody::Update()
 {
-	// 아무것도 하지 않는다
+	// 이동하던 방향으로 자동 이동
+	// 바운더리에 닿아 실패해도 자동으로 방향 전환시켜주지 않는다
+	Move(m_IsRight ? Direction::RIGHT : Direction::LEFT, m_SpeedX);
+	Move(m_IsBottom ? Direction::DOWN : Direction::UP, m_SpeedY);
 }
 
 void SnakeBody::Render()
@@ -29,22 +32,31 @@ void SnakeBody::OnKeyPress(BYTE _key)
 	{
 	case VK_UP:
 	{
-		Move(Direction::UP, m_Speed);
+		m_IsBottom = false;
+		m_SpeedX = 0.f;
+		m_SpeedY = m_Speed;
 	}
 	break;
 	case VK_DOWN:
 	{
-		Move(Direction::DOWN, m_Speed);
+		m_IsBottom = true;
+		m_SpeedX = 0.f;
+		m_SpeedY = m_Speed;
 	}
 	break;
 	case VK_LEFT:
 	{
-		Move(Direction::LEFT, m_Speed);
+		m_IsRight = false;
+		m_SpeedX = m_Speed;
+		m_SpeedY = 0.f;
 	}
 	break;
 	case VK_RIGHT:
 	{
-		Move(Direction::RIGHT, m_Speed);
+		m_IsRight = true;
+		m_SpeedX = m_Speed;
+		m_SpeedY = 0.f;
+
 	}
 	break;
 	case 'Z':
