@@ -6,7 +6,7 @@
 SnakeBody::SnakeBody()
 	:m_Speed(1.f)
 {
-	m_SpeedX = 0.f;
+	m_SpeedX = 1.f;
 	m_SpeedY = 0.f;
 }
 
