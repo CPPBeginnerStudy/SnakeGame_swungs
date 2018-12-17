@@ -65,12 +65,14 @@ void SnakeBody::OnKeyPress(BYTE _key)
 	{
 		// 이속 줄이기
 		m_Speed = std::max<float>(m_Speed - 0.1f, 0.1f);
+		m_SpeedX == 0 ? m_SpeedY = m_Speed : m_SpeedX = m_Speed;
 	}
 	break;
 	case 'X':
 	{
 		// 이속 늘리기
 		m_Speed = std::min<float>(m_Speed + 0.1f, 3.f);
+		m_SpeedX == 0 ? m_SpeedY = m_Speed : m_SpeedX = m_Speed;
 	}
 	break;
 	}
