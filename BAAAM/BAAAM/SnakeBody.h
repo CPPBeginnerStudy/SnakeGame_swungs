@@ -13,8 +13,10 @@ public:
 	void SetSpeed(float _speed) { m_Speed = _speed; }
 
 	void OnKeyPress(BYTE _key);
+	void AddTail();
 
 private:
 	float m_Speed;
 	Direction m_Direction;
+	std::list<Object*>  m_TailList;
 };
