@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "SnakeBody.h"
 #include "Console.h"
+#include "GameManager.h"
 
 
 SnakeBody::SnakeBody()
 	:m_Speed(1.f)
 	, m_Direction(Direction::RIGHT)
 {
+	m_Shape = L'▣';
 }
 
 
@@ -20,13 +22,14 @@ SnakeBody::~SnakeBody()
 
 }
 
+//|a-b| <1
+//	-1<a-b<1
+//	-1<a-b => a>b-1
+//	a-b<1 => a<b+1
+	
+
 void SnakeBody::Update()
 {
-	 // 일단 임시로 10% 확률로 꼬리 추가  
-	 if (rand() % 100 < 10)
-	 {
-		AddTail();
-	 }
 
 	 // 움직이기 전에 먼저 원래 위치를 보관해놓는다.  
 	 // 다음 꼬리가 이 보관된 위치로 이동한다.  
@@ -46,6 +49,21 @@ void SnakeBody::Update()
 		 pTail->SetY(prevY);
 		 prevX = tempX;
 		 prevY = tempY;
+	 }
+
+	 // 머리가 꼬리에 닿았는지 체크
+	 for (auto& pTail : m_TailList)
+	 {
+		 // 두 오브젝트 x,y 거리가 모두 1 이내이면(0.5아님?)
+		 if (m_X > pTail->GetX() - 0.5f &&
+			 m_X < pTail->GetX() + 0.5f &&
+			 m_Y > pTail->GetY() - 0.5f &&
+			 m_Y < pTail->GetY() + 0.5f)
+		 {
+			 // 게임 종료
+			 GameManager::GetInstance().Shutdown();
+			 return;
+		 }
 	 }
 
 }

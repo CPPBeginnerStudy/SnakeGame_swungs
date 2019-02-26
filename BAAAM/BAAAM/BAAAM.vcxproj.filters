@@ -22,6 +22,9 @@
     <ClCompile Include="SnakeBody.cpp">
       <Filter>Class\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Apple.cpp">
+      <Filter>Class\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -40,6 +43,9 @@
       <Filter>Class\Object</Filter>
     </ClInclude>
     <ClInclude Include="SnakeBody.h">
+      <Filter>Class\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Apple.h">
       <Filter>Class\Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,8 @@
 #pragma once
 class Object; // 전방 선언
 class SnakeBody;
+class Apple;
+
 class GameManager
 {
 
@@ -41,6 +43,7 @@ private:
 	bool m_IsOn;
 	std::list<Object*> m_ObjectList;
 	SnakeBody* m_pSnakeBody;
+	Apple* m_pApple;
 
 };
 

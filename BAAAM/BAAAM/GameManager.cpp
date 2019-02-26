@@ -4,10 +4,13 @@
 #include "Object.h"
 #include "RandomSpeedObj.h"
 #include "SnakeBody.h"
+#include "Apple.h"
+
 
 GameManager::GameManager()
 	:m_IsOn(false)
 	,m_pSnakeBody(nullptr)
+	,m_pApple(nullptr)
 	//std::list<Object*> m_ObjectList; 이건 왜 초기화 안시켜줘요?
 	//m_ObjectList.clear(); 안해도됨?
     /// > list와 같은 클래스타입은 여기서 직접 초기화를 하지 않아도
@@ -55,8 +58,11 @@ void GameManager::Init()
 	//Console::GetInstance().Init();
 
 	RECT boundaryBox = console.GetBoundaryBox();
+	// 인게임 좌표에 비해 cmd 좌표는 x값이 2배이기 때문에 2로 나눠준다.
+	boundaryBox.right /= 2;
 
-	// 2개는 등속 기본 오브젝트
+	// 2개는 등속 기본 오브젝트 => 주석처리
+	/*
 	for (int i = 0; i < 2; ++i)
 	{
 		Object* pObject = new Object();
@@ -74,12 +80,12 @@ void GameManager::Init()
         /// > 빌드옵션이 유니코드여서 WriteConsole()함수가 wchar_t 타입을 받아야하는데, char 타입으로 넘겨줬었기 때문입니다.
         /// > 빌드옵션에 상관없이 char문자를 출력하려면 WriteConsoleA()함수를 호출해야 합니다.
 	}
+	*/
 
 	// 3개는 랜덤 속도 오브젝트(기본 오브젝트 상속)
 	for (int i = 0; i < 3; ++i)
 	{
 		Object* pObject = new RandomSpeedObj();
-		pObject->SetShape(L'♬');
 		pObject->SetX(rand() % boundaryBox.right);
 		pObject->SetY(rand() % boundaryBox.bottom);
 		m_ObjectList.push_back(pObject);
@@ -87,10 +93,15 @@ void GameManager::Init()
 
 	// 우리가 직접 조종할 뱀의 몸통을 생성한다.  
 	m_pSnakeBody = new SnakeBody();
-	m_pSnakeBody->SetShape(L'▣');
 	m_pSnakeBody->SetX(boundaryBox.right / 2);  // 중앙에 생성  
 	m_pSnakeBody->SetY(boundaryBox.bottom / 2); // 중앙에 생성
 	m_ObjectList.push_back(m_pSnakeBody);
+
+	// 뱀이 먹을 사과를 생성한다.
+	m_pApple = new Apple();
+	m_pApple->SetX(rand() % boundaryBox.right);
+	m_pApple->SetY(rand() % boundaryBox.bottom);
+	m_ObjectList.push_back(m_pApple);
 
 
 	// 게임 시작시
@@ -100,6 +111,23 @@ void GameManager::Init()
 void GameManager::Release()
 {
 	Console::GetInstance().Release();
+
+	//int a[10] = { 1,2,3,4,5,6,7,8,9,10 };
+	//for (auto& i : a)
+	//{
+	//
+	//	i = i + 1;
+	//	std::cout << i << std::endl;
+	//}
+	//
+	//
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	int& it = a[i];
+	//
+	//	it = 10;
+	//	it += it;
+	//}
 
 	for (auto& pObject : m_ObjectList)
 	{
@@ -145,6 +173,19 @@ void GameManager::Update()
 	for (auto& pObject : m_ObjectList)
 	{
 		pObject->Update();
+	}
+
+	if (m_pSnakeBody->GetX() > m_pApple->GetX() - 0.5f &&
+		m_pSnakeBody->GetX() < m_pApple->GetX() + 0.5f &&
+		m_pSnakeBody->GetY() > m_pApple->GetY() - 0.5f &&
+		m_pSnakeBody->GetY() < m_pApple->GetY() + 0.5f)
+	{
+		m_pSnakeBody->AddTail();
+
+		RECT boundaryBox = Console::GetInstance().GetBoundaryBox();
+		boundaryBox.right /= 2;
+		m_pApple->SetX(rand() % boundaryBox.right);
+		m_pApple->SetY(rand() % boundaryBox.bottom);
 	}
 }
 

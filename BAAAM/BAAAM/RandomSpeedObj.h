@@ -15,5 +15,13 @@ public:
 
 private:
 
+	// 속력
+	float m_SpeedX;
+	float m_SpeedY;
+
+	// 이동방향 구분
+	bool m_IsRight;
+	bool m_IsBottom;
+
 };
 

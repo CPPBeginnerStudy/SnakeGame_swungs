@@ -4,7 +4,12 @@
 
 
 RandomSpeedObj::RandomSpeedObj()
+	: m_SpeedX(1.f)
+	, m_SpeedY(1.f)
+	, m_IsRight(true)
+	, m_IsBottom(true)
 {
+	m_Shape = L'¡Ú';
 }
 
 
