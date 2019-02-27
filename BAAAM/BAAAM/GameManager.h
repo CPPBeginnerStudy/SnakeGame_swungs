@@ -30,10 +30,10 @@ private:
 	void Release();	// 정리
 	void MainLoop();// 메인루프
 
-	void Update(); // 업데이트
+	void Update(float _dt); // 업데이트
 	void Render(); // 렌더링
 
-	void KeyInputHandling();
+	void KeyInputHandling(float _dt);
 
 
 // 프라이빗 변수
@@ -44,6 +44,7 @@ private:
 	std::list<Object*> m_ObjectList;
 	SnakeBody* m_pSnakeBody;
 	Apple* m_pApple;
+	float m_GameSpeed;
 
 };
 

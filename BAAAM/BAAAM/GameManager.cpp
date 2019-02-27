@@ -5,12 +5,15 @@
 #include "RandomSpeedObj.h"
 #include "SnakeBody.h"
 #include "Apple.h"
+#include "Timer.h"
+
 
 
 GameManager::GameManager()
 	:m_IsOn(false)
 	,m_pSnakeBody(nullptr)
 	,m_pApple(nullptr)
+	,m_GameSpeed(1.f)
 	//std::list<Object*> m_ObjectList; 이건 왜 초기화 안시켜줘요?
 	//m_ObjectList.clear(); 안해도됨?
     /// > list와 같은 클래스타입은 여기서 직접 초기화를 하지 않아도
@@ -139,6 +142,8 @@ void GameManager::Release()
 
 void GameManager::MainLoop()
 {
+	Timer mainTimer;
+
 	while (m_IsOn)
 	{	
 		//std라는 네임 스페이스안에 선언되어 있는 cout함수를 사용한다는 뜻.
@@ -156,23 +161,30 @@ void GameManager::MainLoop()
         /// > 그 클래스의 인스턴스.함수(); 또는 인스턴스.변수; 로 써야만 하기 때문에 충돌나지 않습니다.
         /// > 이 함수를 호출한 곳이 다른 클래스여도 마찬가지입니다.
         /// > 결국에는 이 함수 내부에서는 이 함수가 선언된 클래스의 영역입니다. (GameManager::)
+		
+		// 30/게임스피드ms 정지
+		// Sleep(30/m_GameSpeed);
 
-		Update();
+		// 렉 같은게 반영된.. 실제 업데이트 주기(틱)을 알 수 있다. 실제 업데이트 주기는 pc 상태나 환경에 따라서 달라질 수 있는 값
+		// dt를 수치(속도,이동거리 등)에 곱하면 실제 업데이트 주기, 즉 프레임 간격과 관계 없이 동일한 시간에는 동일한 수치만큼 동작시킬 수 있다.
+		// float dt = mainTimer.GetDeltaTime();
+
+		// 게임 스피드를 반영한 게임dt를 dt로 넘겨준다.
+		float realDT = mainTimer.GetDeltaTime();
+		float gameDT = realDT * m_GameSpeed;
+		Update(gameDT);
 		Render();
-
-		// 30ms 정지
-		Sleep(30);
 	}
 }
 
-void GameManager::Update()
+void GameManager::Update(float _dt)
 {
 	//키입력에 대한 처리
-	KeyInputHandling();
+	KeyInputHandling(_dt);
 
 	for (auto& pObject : m_ObjectList)
 	{
-		pObject->Update();
+		pObject->Update(_dt);
 	}
 
 	if (m_pSnakeBody->GetX() > m_pApple->GetX() - 0.5f &&
@@ -202,7 +214,7 @@ void GameManager::Render()
 	console.SwapBuffer();
 }
 
-void GameManager::KeyInputHandling()
+void GameManager::KeyInputHandling(float _dt)
 {
 	// GetAsyncKeyState()함수는 현재 키보드의 특정 키의 눌린 상태를 반환한다.
 	// 어떤 키를 확인할지는 인자로 받으며, VK_ 로 시작하는 매크로값으로 정해져있다.
@@ -254,10 +266,16 @@ void GameManager::KeyInputHandling()
 	if (GetAsyncKeyState('Z') & 0x8000)
 	{
 		m_pSnakeBody->OnKeyPress('Z');
+
+		// 게임 속도 줄이기 (최소 0.1배)
+		m_GameSpeed = std::max<float>(m_GameSpeed  - _dt, 0.1f);
 	}
 	if (GetAsyncKeyState('X') & 0x8000)
 	{
 		m_pSnakeBody->OnKeyPress('X');
+
+		// 게임 속도 늘리기 (최대 3배)
+		m_GameSpeed = std::min<float>(m_GameSpeed + _dt, 3.0f);
 	}
 }
 

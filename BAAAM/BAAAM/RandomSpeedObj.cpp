@@ -4,8 +4,8 @@
 
 
 RandomSpeedObj::RandomSpeedObj()
-	: m_SpeedX(1.f)
-	, m_SpeedY(1.f)
+	: m_SpeedX(10.f)
+	, m_SpeedY(10.f)
 	, m_IsRight(true)
 	, m_IsBottom(true)
 {
@@ -17,22 +17,22 @@ RandomSpeedObj::~RandomSpeedObj()
 {
 }
 
-void RandomSpeedObj::Update()
+void RandomSpeedObj::Update(float _dt)
 {
 
 	// 속력 랜덤 최소 최대값 /2될 값
 	int speedMax = 6;
 	int speedMin = 1;
 
-	if (!Move(m_IsRight ? Direction::RIGHT : Direction::LEFT, m_SpeedX))
+	if (!Move(m_IsRight ? Direction::RIGHT : Direction::LEFT, m_SpeedX *_dt))
 	{
 		m_IsRight = !m_IsRight;
-		m_SpeedX = (rand() % (speedMax - speedMin + 1) + speedMin) * 0.5f;
+		m_SpeedX = (rand() % (speedMax - speedMin + 1) + speedMin) * 5.f;
 	}
-	if (!Move(m_IsBottom ? Direction::DOWN : Direction::UP, m_SpeedY))
+	if (!Move(m_IsBottom ? Direction::DOWN : Direction::UP, m_SpeedY *_dt))
 	{
 		m_IsBottom = !m_IsBottom;
-		m_SpeedY = (rand() % (speedMax - speedMin + 1) + speedMin) * 0.5f;
+		m_SpeedY = (rand() % (speedMax - speedMin + 1) + speedMin) * 5.f;
 	}
 }
 

@@ -20,7 +20,7 @@ Object::~Object()
 {
 }
 
-void Object::Update()
+void Object::Update(float _dt)
 {
 
 }

@@ -10,7 +10,7 @@ public:
 	RandomSpeedObj();
 	virtual ~RandomSpeedObj();
 
-	virtual void Update() override;
+	virtual void Update(float _dt) override;
 	virtual void Render() override;
 
 private:

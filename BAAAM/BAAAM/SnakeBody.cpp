@@ -5,7 +5,7 @@
 
 
 SnakeBody::SnakeBody()
-	:m_Speed(1.f)
+	:m_Speed(10.f)
 	, m_Direction(Direction::RIGHT)
 {
 	m_Shape = L'▣';
@@ -28,7 +28,7 @@ SnakeBody::~SnakeBody()
 //	a-b<1 => a<b+1
 	
 
-void SnakeBody::Update()
+void SnakeBody::Update(float _dt)
 {
 
 	 // 움직이기 전에 먼저 원래 위치를 보관해놓는다.  
@@ -38,7 +38,7 @@ void SnakeBody::Update()
 
 	 // 이동하던 방향으로 자동 이동
 	 // 바운더리에 닿아 실패해도 자동으로 방향 전환시켜주지 않는다
-	 Move(m_Direction, m_Speed);
+	 Move(m_Direction, m_Speed * _dt);
 	
 	 // 각 꼬리는 이전 꼬리의 위치로 셋팅된다. (즉, 따라가는 형태가 된다.)  
 	 for (auto& pTail : m_TailList)
@@ -106,13 +106,15 @@ void SnakeBody::OnKeyPress(BYTE _key)
 	case 'Z':
 	{
 		// 이속 줄이기
-		m_Speed = std::max<float>(m_Speed - 0.1f, 0.1f);
+		// 사용 안하니까 주석 처리
+		//m_Speed = std::max<float>(m_Speed - 0.1f, 0.1f);
 	}
 	break;
 	case 'X':
 	{
 		// 이속 늘리기
-		m_Speed = std::min<float>(m_Speed + 0.1f, 3.f);
+		// 사용 안하니까 주석 처리
+		//m_Speed = std::min<float>(m_Speed + 0.1f, 3.f);
 	}
 	break;
 	}

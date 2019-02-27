@@ -159,6 +159,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="RandomSpeedObj.h" />
     <ClInclude Include="SnakeBody.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Apple.cpp" />
@@ -174,6 +175,7 @@
     </ClCompile>
     <ClCompile Include="RandomSpeedObj.cpp" />
     <ClCompile Include="SnakeBody.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

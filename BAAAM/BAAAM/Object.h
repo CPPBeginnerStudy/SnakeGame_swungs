@@ -28,7 +28,7 @@ public:
 	// 사용할 일이 없을 거 같으니 제거
 	//virtual void Init();
 	//virtual void Release();
-	virtual void Update();
+	virtual void Update(float _dt);
 	virtual void Render();
 
 	// 여기서 const는 무슨 뜻일까요? 
