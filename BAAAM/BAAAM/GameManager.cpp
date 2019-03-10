@@ -143,6 +143,12 @@ void GameManager::Release()
 void GameManager::MainLoop()
 {
 	Timer mainTimer;
+	Timer updateTimer;
+	Timer renderTimer;
+
+	updateTimer.SetDelay(0.1f);	// 0.1초 주기로 불림
+	renderTimer.SetDelay(0.01f); // 0.01초 주기로 불림
+
 
 	while (m_IsOn)
 	{	
@@ -169,11 +175,20 @@ void GameManager::MainLoop()
 		// dt를 수치(속도,이동거리 등)에 곱하면 실제 업데이트 주기, 즉 프레임 간격과 관계 없이 동일한 시간에는 동일한 수치만큼 동작시킬 수 있다.
 		// float dt = mainTimer.GetDeltaTime();
 
-		// 게임 스피드를 반영한 게임dt를 dt로 넘겨준다.
 		float realDT = mainTimer.GetDeltaTime();
 		float gameDT = realDT * m_GameSpeed;
-		Update(gameDT);
-		Render();
+
+		// 게임 스피드를 반영한 게임dt를 dt로 넘겨준다.
+		if (updateTimer.CheckDelay(gameDT))
+		{
+			Update(gameDT);
+		}
+
+		// 게임 스피드와 무관한 실제 dt로 딜레이 체크
+		if (renderTimer.CheckDelay(realDT))
+		{
+			Render();
+		}
 	}
 }
 
@@ -187,10 +202,8 @@ void GameManager::Update(float _dt)
 		pObject->Update(_dt);
 	}
 
-	if (m_pSnakeBody->GetX() > m_pApple->GetX() - 0.5f &&
-		m_pSnakeBody->GetX() < m_pApple->GetX() + 0.5f &&
-		m_pSnakeBody->GetY() > m_pApple->GetY() - 0.5f &&
-		m_pSnakeBody->GetY() < m_pApple->GetY() + 0.5f)
+	if (m_pSnakeBody->GetX() == m_pApple->GetX() &&
+		m_pSnakeBody->GetY() == m_pApple->GetY())
 	{
 		m_pSnakeBody->AddTail();
 
@@ -268,14 +281,14 @@ void GameManager::KeyInputHandling(float _dt)
 		m_pSnakeBody->OnKeyPress('Z');
 
 		// 게임 속도 줄이기 (최소 0.1배)
-		m_GameSpeed = std::max<float>(m_GameSpeed  - _dt, 0.1f);
+		m_GameSpeed = std::max<float>(m_GameSpeed  - 0.1f, 0.1f);
 	}
 	if (GetAsyncKeyState('X') & 0x8000)
 	{
 		m_pSnakeBody->OnKeyPress('X');
 
 		// 게임 속도 늘리기 (최대 3배)
-		m_GameSpeed = std::min<float>(m_GameSpeed + _dt, 3.0f);
+		m_GameSpeed = std::min<float>(m_GameSpeed + 0.1f, 3.0f);
 	}
 }
 

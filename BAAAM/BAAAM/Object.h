@@ -43,16 +43,16 @@ public:
     /// > a.GetShape();     // ok
     /// > a.SetShape(' ');  // error
 	wchar_t GetShape() const { return m_Shape; }
-	float GetX() const { return m_X; }
-	float GetY() const { return m_Y; }
+	int GetX() const { return m_X; }
+	int GetY() const { return m_Y; }
 
 	void SetShape(wchar_t _shape) { m_Shape = _shape; }
-	void SetX(float _x) { m_X = _x; }
-	void SetY(float _y) { m_Y = _y; }
+	void SetX(int _x) { m_X = _x; }
+	void SetY(int _y) { m_Y = _y; }
 
 	// 방향과 거리를 인자로 받아서 이동을 수행하고,
     // 실제로 이동을 했는지 여부를 bool값으로 반환하는 함수
-	bool Move(Direction _dir, float _distance);
+	bool Move(Direction _dir, int _distance);
 
 private:
 protected: 
@@ -66,8 +66,8 @@ protected:
 
 	// 모양과 좌표
 	wchar_t m_Shape;
-	float m_X;
-	float m_Y;
+	int m_X;
+	int m_Y;
 
 
 

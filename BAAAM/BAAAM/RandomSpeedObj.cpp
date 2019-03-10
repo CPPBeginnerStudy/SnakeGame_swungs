@@ -4,8 +4,8 @@
 
 
 RandomSpeedObj::RandomSpeedObj()
-	: m_SpeedX(10.f)
-	, m_SpeedY(10.f)
+	: m_SpeedX(1)
+	, m_SpeedY(1)
 	, m_IsRight(true)
 	, m_IsBottom(true)
 {
@@ -24,15 +24,15 @@ void RandomSpeedObj::Update(float _dt)
 	int speedMax = 6;
 	int speedMin = 1;
 
-	if (!Move(m_IsRight ? Direction::RIGHT : Direction::LEFT, m_SpeedX *_dt))
+	if (!Move(m_IsRight ? Direction::RIGHT : Direction::LEFT, m_SpeedX))
 	{
 		m_IsRight = !m_IsRight;
-		m_SpeedX = (rand() % (speedMax - speedMin + 1) + speedMin) * 5.f;
+		m_SpeedX = rand() % (speedMax - speedMin + 1) + speedMin;
 	}
-	if (!Move(m_IsBottom ? Direction::DOWN : Direction::UP, m_SpeedY *_dt))
+	if (!Move(m_IsBottom ? Direction::DOWN : Direction::UP, m_SpeedY))
 	{
 		m_IsBottom = !m_IsBottom;
-		m_SpeedY = (rand() % (speedMax - speedMin + 1) + speedMin) * 5.f;
+		m_SpeedY = rand() % (speedMax - speedMin + 1) + speedMin; 
 	}
 }
 

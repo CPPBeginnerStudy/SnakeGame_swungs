@@ -5,7 +5,7 @@
 
 
 SnakeBody::SnakeBody()
-	:m_Speed(10.f)
+	:m_Speed(1) // 1번 업데이트 될 때 이동할 거리
 	, m_Direction(Direction::RIGHT)
 {
 	m_Shape = L'▣';
@@ -33,18 +33,18 @@ void SnakeBody::Update(float _dt)
 
 	 // 움직이기 전에 먼저 원래 위치를 보관해놓는다.  
 	 // 다음 꼬리가 이 보관된 위치로 이동한다.  
-	 float prevX = m_X;
-	 float prevY = m_Y;
+	 int prevX = m_X;
+	 int prevY = m_Y;
 
 	 // 이동하던 방향으로 자동 이동
 	 // 바운더리에 닿아 실패해도 자동으로 방향 전환시켜주지 않는다
-	 Move(m_Direction, m_Speed * _dt);
+	 Move(m_Direction, m_Speed);
 	
 	 // 각 꼬리는 이전 꼬리의 위치로 셋팅된다. (즉, 따라가는 형태가 된다.)  
 	 for (auto& pTail : m_TailList)
 	 {
-		 float tempX = pTail->GetX();
-		 float tempY = pTail->GetY();
+		 int tempX = pTail->GetX();
+		 int tempY = pTail->GetY();
 		 pTail->SetX(prevX);
 		 pTail->SetY(prevY);
 		 prevX = tempX;
@@ -54,11 +54,9 @@ void SnakeBody::Update(float _dt)
 	 // 머리가 꼬리에 닿았는지 체크
 	 for (auto& pTail : m_TailList)
 	 {
-		 // 두 오브젝트 x,y 거리가 모두 1 이내이면(0.5아님?)
-		 if (m_X > pTail->GetX() - 0.5f &&
-			 m_X < pTail->GetX() + 0.5f &&
-			 m_Y > pTail->GetY() - 0.5f &&
-			 m_Y < pTail->GetY() + 0.5f)
+		 // 두 오브젝트 x,y 좌표가 같으면
+		 if (m_X == pTail->GetX() &&
+			 m_Y == pTail->GetY())
 		 {
 			 // 게임 종료
 			 GameManager::GetInstance().Shutdown();

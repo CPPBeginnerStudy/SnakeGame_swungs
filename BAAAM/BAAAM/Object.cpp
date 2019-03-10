@@ -4,8 +4,8 @@
 
 Object::Object()
 	:m_Shape(L' ')
-	,m_X(0.f)
-	,m_Y(0.f)
+	,m_X(0)
+	,m_Y(0)
 
 
 	// 정수형 좌표니까 최소값은 1인데 이것보다 더 속도를 줄이고 싶으면 어떻게 하지?
@@ -31,27 +31,21 @@ void Object::Render()
 	Console::GetInstance().Print(m_Shape, (short)(m_X * 2), (short)m_Y);
 }
 
-bool Object::Move(Direction _dir, float _distance)
+bool Object::Move(Direction _dir, int _distance)
 {
 	RECT boundaryBox = Console::GetInstance().GetBoundaryBox();
-
-	//cmd 좌표를 인게임 좌표로 변환
-	float minX = (float)boundaryBox.left / 2;
-	float maxX = (float)boundaryBox.right / 2;
-	float minY = (float)boundaryBox.top;
-	float maxY = (float)boundaryBox.bottom;
 
 	switch (_dir)
 	{
 	case Direction::UP:
 	{
 		// 현재 y좌표가 위쪽 경계선보다 크면(아래쪽이면) 위쪽으로 이동이 가능하다.
-		if (m_Y > minY)
+		if (m_Y > boundaryBox.top)
 		{
 			// 요청된 거리만큼 이동을 시도하며, 바운더리를 넘어서지 않도록 처리한다.
 			// std::max는 두개의 인자중 더 큰것을 반환하는 함수이다.
 			// 즉, m_Y - _distance 가 바운더리보다 작으면, 바운더리값을 반환하여 그 이하값이 나오지 않게한다.
-			m_Y = std::max<float>(m_Y - _distance, minY);
+			m_Y = std::max<int>(m_Y - _distance, boundaryBox.top);
 
 			// 여기에 왔다는건 어찌됐든 어느정도 이동은 한다는 뜻이다.
 			return true;
@@ -61,9 +55,9 @@ bool Object::Move(Direction _dir, float _distance)
 	case Direction::DOWN:
 	{
 		// 현재 y좌표가 아래쪽 경계선보다 작으면(위쪽이면) 아래쪽으로 이동이 가능하다.
-		if (m_Y < maxY)
+		if (m_Y < boundaryBox.bottom)
 		{
-			m_Y = std::min<float>(m_Y + _distance, maxY);
+			m_Y = std::min<int>(m_Y + _distance, boundaryBox.bottom);
 			return true;
 		}
 	}
@@ -71,9 +65,9 @@ bool Object::Move(Direction _dir, float _distance)
 	case Direction::LEFT:
 	{
 		// 현재 x좌표가 왼쪽 경계선보다 크면(오른쪽이면) 왼쪽으로 이동이 가능하다.
-		if (m_X > minX)
+		if (m_X > boundaryBox.left)
 		{
-			m_X = std::max<float>(m_X - _distance, minX);
+			m_X = std::max<int>(m_X - _distance, boundaryBox.left);
 			return true;
 		}
 	}
@@ -81,9 +75,9 @@ bool Object::Move(Direction _dir, float _distance)
 	case Direction::RIGHT:
 	{
 		// 현재 x좌표가 오른쪽 경계선보다 작으면(왼쪽이면) 오른쪽으로 이동이 가능하다.
-		if (m_X < maxX)
+		if (m_X < boundaryBox.right)
 		{
-			m_X = std::min<float>(m_X + _distance, maxX);
+			m_X = std::min<int>(m_X + _distance, boundaryBox.right);
 			return true;
 		}
 	}
