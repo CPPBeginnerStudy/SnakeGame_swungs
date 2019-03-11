@@ -54,6 +54,9 @@
     <ClInclude Include="Timer.h">
       <Filter>Class\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Color.hpp">
+      <Filter>Class\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">

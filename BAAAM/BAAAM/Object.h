@@ -1,4 +1,5 @@
 #pragma once
+#include "Color.hpp"
 class Object
 {
 
@@ -43,10 +44,14 @@ public:
     /// > a.GetShape();     // ok
     /// > a.SetShape(' ');  // error
 	wchar_t GetShape() const { return m_Shape; }
+	Color GetColor() const { return m_Color; }
+	Color GetBgcolor() const { return m_Bgcolor; }
 	int GetX() const { return m_X; }
 	int GetY() const { return m_Y; }
 
 	void SetShape(wchar_t _shape) { m_Shape = _shape; }
+	void SetColor(Color _color) { m_Color = _color; }
+	void SetBgcolor(Color _bgcolor) { m_Bgcolor = _bgcolor; }
 	void SetX(int _x) { m_X = _x; }
 	void SetY(int _y) { m_Y = _y; }
 
@@ -66,6 +71,8 @@ protected:
 
 	// ¸ð¾ç°ú ÁÂÇ¥
 	wchar_t m_Shape;
+	Color m_Color;
+	Color m_Bgcolor;
 	int m_X;
 	int m_Y;
 

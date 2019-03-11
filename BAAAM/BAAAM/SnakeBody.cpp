@@ -8,7 +8,10 @@ SnakeBody::SnakeBody()
 	:m_Speed(1) // 1번 업데이트 될 때 이동할 거리
 	, m_Direction(Direction::RIGHT)
 {
-	m_Shape = L'▣';
+	m_Shape = L'▣'; //▣
+	m_Color = Color::GREEN;
+	//m_Bgcolor = Color::DARK_RED;
+
 }
 
 
@@ -124,6 +127,9 @@ void SnakeBody::AddTail()
 {
 	Object * pTail = new Object();
 	pTail->SetShape(L'※');
+	pTail->SetColor(Color::DARK_RED);
+	pTail->SetBgcolor(Color::GREEN);
+
 	m_TailList.push_back(pTail);
 
 }

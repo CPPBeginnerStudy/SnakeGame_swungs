@@ -1,4 +1,5 @@
 #pragma once
+#include "Color.hpp"
 class Console
 {
 
@@ -69,7 +70,7 @@ public:
 	void Clear();
 	void SwapBuffer();
 
-	void Print(wchar_t _shape, short _x, short _y);
+	void Print(wchar_t _shape, Color _color, Color _bgcolor, short _x, short _y);
 	void PrintText(const std::wstring& _text, short _x, short _y);
 
 	RECT     GetBoundaryBox() const;

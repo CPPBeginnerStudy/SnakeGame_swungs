@@ -75,6 +75,7 @@ void Console::Clear()
 	DWORD dw;
 	DWORD screensize = m_ScreenWidth * m_ScreenHeight;
 	FillConsoleOutputCharacter(m_ScreenBuffer[m_BackBufferIdx], L' ', screensize, { 0, 0 }, &dw);
+	FillConsoleOutputAttribute(m_ScreenBuffer[m_BackBufferIdx], Color::BLACK, screensize, { 0, 0 }, &dw);
 }
 
 void Console::SwapBuffer()
@@ -97,15 +98,19 @@ void Console::SwapBuffer()
 /// > 기본타입(char, int, bool 등)의 경우 복사되는 비용이 레퍼런스로 넘기는 비용과 동일하기 때문.
 /// > 하지만 클래스타입(string 등)은 복사비용이 멤버변수에 따라 엄청 커질 수 있기 때문에
 /// > 복사할 필요가 없는 이런 구문에선 레퍼런스로 넘기도록 하는 것입니다.
-void Console::Print(wchar_t _shape, short _x, short _y)
+void Console::Print(wchar_t _shape, Color _color, Color _bgcolor, short _x, short _y)	
 {
 	DWORD dw;
 
+	// 컬러 지정
+	SetConsoleTextAttribute(m_ScreenBuffer[m_BackBufferIdx], _color + (_bgcolor << 4));
 	// 커서 지정 좌표로 이동
 	SetConsoleCursorPosition(m_ScreenBuffer[m_BackBufferIdx], { _x, _y });
 	
 	// 글자 쓰기(shape 표시)
 	WriteConsole(m_ScreenBuffer[m_BackBufferIdx], &_shape, 1, &dw, nullptr);
+
+
 }
 
 // 문자열 표시하기

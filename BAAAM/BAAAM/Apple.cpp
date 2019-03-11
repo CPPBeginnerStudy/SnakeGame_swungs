@@ -5,6 +5,7 @@
 Apple::Apple()
 {
 	m_Shape = L'£À';
+	m_Color = Color::RED;
 }
 
 Apple::~Apple()

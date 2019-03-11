@@ -9,6 +9,7 @@ RandomSpeedObj::RandomSpeedObj()
 	, m_IsRight(true)
 	, m_IsBottom(true)
 {
+	m_Color = Color::YELLOW;
 	m_Shape = L'¡Ú';
 }
 
@@ -28,11 +29,13 @@ void RandomSpeedObj::Update(float _dt)
 	{
 		m_IsRight = !m_IsRight;
 		m_SpeedX = rand() % (speedMax - speedMin + 1) + speedMin;
+		m_Color = Color(rand() % 16);
 	}
 	if (!Move(m_IsBottom ? Direction::DOWN : Direction::UP, m_SpeedY))
 	{
 		m_IsBottom = !m_IsBottom;
 		m_SpeedY = rand() % (speedMax - speedMin + 1) + speedMin; 
+		m_Color = Color(rand() % 16);
 	}
 }
 

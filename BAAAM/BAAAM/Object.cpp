@@ -4,6 +4,8 @@
 
 Object::Object()
 	:m_Shape(L' ')
+	,m_Color(Color::WHITE)
+	,m_Bgcolor(Color::BLACK)
 	,m_X(0)
 	,m_Y(0)
 
@@ -28,7 +30,7 @@ void Object::Update(float _dt)
 void Object::Render()
 {
 	// 거리를 2배 곱하는 이유는 x좌표가 y좌표의 절반이기 때문.
-	Console::GetInstance().Print(m_Shape, (short)(m_X * 2), (short)m_Y);
+	Console::GetInstance().Print(m_Shape, m_Color, m_Bgcolor, (short)(m_X * 2), (short)m_Y);
 }
 
 bool Object::Move(Direction _dir, int _distance)
