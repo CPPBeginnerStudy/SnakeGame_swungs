@@ -8,8 +8,9 @@ SnakeBody::SnakeBody()
 	:m_Speed(1) // 1번 업데이트 될 때 이동할 거리
 	, m_Direction(Direction::RIGHT)
 {
-	m_Shape = L'▣'; //▣
-	m_Color = Color::GREEN;
+	m_Shape = L'□'; //▣
+	m_Color = Color::BLACK;
+	m_Bgcolor = Color::GREEN;
 	//m_Bgcolor = Color::DARK_RED;
 
 }
@@ -86,22 +87,34 @@ void SnakeBody::OnKeyPress(BYTE _key)
 	{
 	case VK_UP:
 	{
-		m_Direction = Direction::UP;
+		if (m_Direction != Direction::DOWN)
+		{
+			m_Direction = Direction::UP;
+		}
 	}
 	break;
 	case VK_DOWN:
 	{
-		m_Direction = Direction::DOWN;
+		if (m_Direction != Direction::UP)
+		{
+			m_Direction = Direction::DOWN;
+		}
 	}
 	break;
 	case VK_LEFT:
 	{
-		m_Direction = Direction::LEFT;
+		if (m_Direction != Direction::RIGHT)
+		{
+			m_Direction = Direction::LEFT;
+		}
 	}
 	break;
 	case VK_RIGHT:
 	{
-		m_Direction = Direction::RIGHT;
+		if (m_Direction != Direction::LEFT)
+		{
+			m_Direction = Direction::RIGHT;
+		}
 	}
 	break;
 	case 'Z':

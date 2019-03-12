@@ -5,6 +5,7 @@
 #include "RandomSpeedObj.h"
 #include "SnakeBody.h"
 #include "Apple.h"
+#include "DeathZone.h"
 #include "Timer.h"
 
 
@@ -13,6 +14,7 @@ GameManager::GameManager()
 	:m_IsOn(false)
 	,m_pSnakeBody(nullptr)
 	,m_pApple(nullptr)
+	,m_pDeathZone(nullptr)
 	,m_GameSpeed(1.f)
 	//std::list<Object*> m_ObjectList; 이건 왜 초기화 안시켜줘요?
 	//m_ObjectList.clear(); 안해도됨?
@@ -102,9 +104,14 @@ void GameManager::Init()
 
 	// 뱀이 먹을 사과를 생성한다.
 	m_pApple = new Apple();
-	m_pApple->SetX(rand() % boundaryBox.right);
-	m_pApple->SetY(rand() % boundaryBox.bottom);
+	m_pApple->SetX(rand() % (boundaryBox.right - 2) + 1);
+	m_pApple->SetY(rand() % (boundaryBox.bottom - 2) + 1);
 	m_ObjectList.push_back(m_pApple);
+
+	// 데스존을 생성한다.
+	m_pDeathZone = new DeathZone();
+	m_pDeathZone->GenerateLines();
+	m_ObjectList.push_back(m_pDeathZone);
 
 
 	// 게임 시작시
@@ -138,6 +145,9 @@ void GameManager::Release()
 	}
 
 	m_ObjectList.clear();
+	m_pSnakeBody = nullptr;
+	m_pApple = nullptr;
+	m_pDeathZone = nullptr;
 }
 
 void GameManager::MainLoop()
@@ -209,8 +219,13 @@ void GameManager::Update(float _dt)
 
 		RECT boundaryBox = Console::GetInstance().GetBoundaryBox();
 		boundaryBox.right /= 2;
-		m_pApple->SetX(rand() % boundaryBox.right);
-		m_pApple->SetY(rand() % boundaryBox.bottom);
+		m_pApple->SetX(rand() % (boundaryBox.right - 2) + 1);
+		m_pApple->SetY(rand() % (boundaryBox.bottom - 2) + 1);
+	}
+
+	if (m_pDeathZone->IsInDeathZone(m_pSnakeBody))
+	{
+		GameManager::GetInstance().Shutdown();
 	}
 }
 

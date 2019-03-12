@@ -1,10 +1,10 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Apple.h"
 
 
 Apple::Apple()
 {
-	m_Shape = L'£À';
+	m_Shape = L'Ç‘';
 	m_Color = Color::RED;
 }
 

@@ -2,6 +2,7 @@
 class Object; // 전방 선언
 class SnakeBody;
 class Apple;
+class DeathZone;
 
 class GameManager
 {
@@ -44,6 +45,7 @@ private:
 	std::list<Object*> m_ObjectList;
 	SnakeBody* m_pSnakeBody;
 	Apple* m_pApple;
+	DeathZone* m_pDeathZone;
 	float m_GameSpeed;
 
 };
